@@ -1,0 +1,43 @@
+name: Install Tirith
+
+on: [push, pull_request]
+
+jobs:
+  install-tirith:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Install Tirith
+      run: pip install git+https://github.com/StackGuardian/tirith.git
+
+    # TODO: Convert this into github actions template
+    - name: Install Terraform
+      run: |
+        sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        sudo apt-get update && sudo apt-get install -y terraform
+
+    # TODO: Add a terra
+    - name: Generate terraform plan
+      run: |
+        terraform init
+        terraform plan -out=tfplan
+        terraform show -json tfplan > input.json
+
+    - name: Run Tirith
+      run: tirith -input-path input.json -policy-path policy.json --json > results.json
+
+    - name: Upload results
+      uses: actions/upload-artifact@v2
+      with:
+        name: tirith-results
+        path: results.json
