@@ -1,0 +1,24 @@
+
+{
+    "meta": {
+        "version": "v1",
+        "required_provider": "stackguardian/terraform_plan"
+    },
+    "evaluators": [
+        {
+            "id": "s3_is_private",
+            "description": "Ensure that S3 bucket is private",
+            "provider_args": {
+                "operation_type": "attribute",
+                "terraform_resource_type": "aws_s3_bucket_acl",
+                "terraform_resource_attribute": "acl"
+            },
+            "condition": {
+                "type": "Equals",
+                "value": "private",
+                "error_tolerance": 2
+            }
+        }
+    ],
+    "eval_expression": "s3_is_private && s3_acl_depends_on_s3_bucket"
+}

@@ -1,1 +1,4 @@
-// TODO: Add some AWS resources and create a tirith policy
+resource "aws_s3_bucket" "example_bucket" {
+  bucket = "example-bucket-name"
+  acl    = "private"
+}
