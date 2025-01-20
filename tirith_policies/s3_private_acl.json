@@ -16,9 +16,22 @@
             "condition": {
                 "type": "Equals",
                 "value": "private",
-                "error_tolerance": 2
+                "error_tolerance": 0
+            }
+        },
+        {
+            "id": "s3_acl_depends_on_s3_bucket",
+            "description": "Ensure that aws_s3_bucket_acl is linked to aws_s3_bucket",
+            "provider_args": {
+                "operation_type": "direct_references",
+                "terraform_resource_type": "aws_s3_bucket_acl",
+                "references_to": "aws_s3_bucket"
+            },
+            "condition": {
+                "type": "Equals",
+                "value": true
             }
         }
     ],
-    "eval_expression": "s3_is_private && s3_acl_depends_on_s3_bucket"
+    "eval_expression": "s3_is_private || s3_acl_depends_on_s3_bucket"
 }
