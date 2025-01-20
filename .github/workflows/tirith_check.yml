@@ -37,10 +37,4 @@ jobs:
         terraform show -json tfplan > input.json
 
     - name: Run Tirith
-      run: tirith -input-path input.json -policy-path tirith_policies/s3_private_acl.json --json > results.json
-
-    - name: Upload results
-      uses: actions/upload-artifact@v4
-      with:
-        name: tirith-results
-        path: results.json
+      run: tirith -input-path input.json -policy-path tirith_policies/s3_private_acl.json
