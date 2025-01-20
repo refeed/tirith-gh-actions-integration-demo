@@ -37,7 +37,7 @@ jobs:
       run: tirith -input-path input.json -policy-path policy.json --json > results.json
 
     - name: Upload results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: tirith-results
         path: results.json
