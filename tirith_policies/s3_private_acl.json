@@ -33,5 +33,5 @@
             }
         }
     ],
-    "eval_expression": "s3_is_private || s3_acl_depends_on_s3_bucket"
+    "eval_expression": "s3_is_private && s3_acl_depends_on_s3_bucket"
 }
