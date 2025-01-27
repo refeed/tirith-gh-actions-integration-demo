@@ -39,4 +39,4 @@ jobs:
     - name: Run Tirith
       run: |
         tirith -input-path input.json -policy-path tirith_policies/s3_private_acl.json
-        tirith -input-path input.json -policy-path tirith_policies/s3_private_acl.json | jq -e '.final_result == true' > /dev/null || exit 1
+        tirith -input-path input.json -policy-path tirith_policies/s3_private_acl.json --json | jq -e '.final_result == true' > /dev/null || exit 1
