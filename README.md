@@ -1,5 +1,3 @@
 # tirith-gh-actions-integration-demo
 
-TODO
-- [ ] Create a tf file about s3 bucket tag
-- [ ] 
+A simple demo to show how to integrate GitHub Actions with Tirith.
