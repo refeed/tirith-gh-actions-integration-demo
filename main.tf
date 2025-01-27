@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_s3_bucket_acl" "example" {
   bucket = aws_s3_bucket.example_bucket.id
 
-  acl = "public-read"
+  acl = "private"
 }
 
 resource "aws_s3_bucket" "example_bucket" {
